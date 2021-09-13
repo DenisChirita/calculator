@@ -87,7 +87,7 @@ function compute() {
             case "/": if (Number(currentValue) === 0) { currentValue = ""; previousValue = ""; display.textContent = "Error"; return; } currentValue = "" + (Number(previousValue) / Number(currentValue)); break;
             case "-": currentValue = "" + (Number(previousValue) - Number(currentValue)); break;
         }
-    currentValue = Math.round(currentValue * 10000) / 10000;
+    currentValue = roundToFiveDecimals(currentValue);
     display.textContent = Number(currentValue) + "";
     previousValue = currentValue;
     currentValue = "";
@@ -95,6 +95,8 @@ function compute() {
 
 function pressNonZeroDigit(digit) {
     if (currentValue.length <= 18) {
+        if (currentValue.length > 0 && Number(currentValue) === 0 && currentValue.indexOf('.') === -1)
+            currentValue = "";
         currentValue += digit;
         display.textContent = Number(currentValue) + "";
     }
@@ -102,6 +104,8 @@ function pressNonZeroDigit(digit) {
 
 function pressZero() {
     if (currentValue.length <= 18) {
+        if (currentValue.length > 0 && Number(currentValue) === 0 && currentValue.indexOf('.') === -1)
+            return;
         currentValue += "0";
         display.textContent = currentValue + "";
     }
@@ -109,6 +113,8 @@ function pressZero() {
 
 function pressDot() {
     if (currentValue.indexOf('.') === -1) {
+        if (currentValue == "")
+            currentValue = "0";
         currentValue += '.';
     }
     display.textContent = currentValue + "";
@@ -127,7 +133,7 @@ function pressOperator(op) {
 
 function pressPercentage() {
     compute();
-    currentValue = "" + Math.round((Number(previousValue) / 100) * 10000) / 10000;
+    currentValue = "" + roundToFiveDecimals(Number(previousValue) / 100);
     display.textContent = Number(currentValue) + "";
     previousValue = "";
 }
@@ -138,6 +144,10 @@ function clearEntry() {
     if (currentValue === "") {
         previousValue = "";
     }
+}
+
+function roundToFiveDecimals(value) {
+    return Math.round(value * 100000) / 100000;
 }
 
 /**
