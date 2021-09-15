@@ -15,6 +15,7 @@ for (let i = 1; i <= 18; ++i) {
     else {
         switch (i) {
             case 1: cellButton.textContent = "AC";
+                cellButton.style.color = "red";
                 cellButton.addEventListener("click", function () {
                     currentValue = "";
                     previousValue = "";
@@ -22,32 +23,38 @@ for (let i = 1; i <= 18; ++i) {
                 });
                 break;
             case 2: cellButton.textContent = "CE";
+                cellButton.style.color = "red";
                 cellButton.addEventListener("click",
                     function () {
                         clearEntry();
                     });
                 break;
             case 3: cellButton.textContent = "\u0025";
+                cellButton.style.color = "blue";
                 cellButton.addEventListener("click",
                     function () {
                         pressPercentage();
                     }); break;
             case 4: cellButton.textContent = "\u00F7";
+                cellButton.style.color = "blue";
                 cellButton.addEventListener("click",
                     function () {
                         pressOperator('/');
                     }); break;
             case 8: cellButton.textContent = "\u2715";
+                cellButton.style.color = "blue";
                 cellButton.addEventListener("click",
                     function () {
                         pressOperator('*');
                     }); break;
             case 12: cellButton.textContent = "\u2212";
+                cellButton.style.color = "blue";
                 cellButton.addEventListener("click",
                     function () {
                         pressOperator('-');
                     }); break;
             case 16: cellButton.textContent = "\uFF0B";
+                cellButton.style.color = "blue";
                 cellButton.addEventListener("click",
                     function () {
                         pressOperator('+');
